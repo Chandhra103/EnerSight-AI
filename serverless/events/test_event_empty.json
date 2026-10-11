@@ -1,0 +1,9 @@
+{
+  "httpMethod": "POST",
+  "path": "/api/v1/analyze",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{\"readings\": []}",
+  "isBase64Encoded": false
+}

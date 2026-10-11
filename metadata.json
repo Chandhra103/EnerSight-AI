@@ -1,0 +1,6 @@
+{
+  "name": "EnerSight AI",
+  "description": "Multi-building energy analytics and explainable anomaly detection platform for sustainability and cost reduction.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
