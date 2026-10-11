@@ -8,7 +8,7 @@ Globals:
   Function:
     Timeout: 15
     MemorySize: 256
-    Runtime: nodejs20.x
+    Runtime: nodejs24.x
     Architectures:
       - x86_64
     Environment:
@@ -22,7 +22,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: .
-      Handler: serverless/handlers/analyze.handler
+      Handler: analyze.handler
       Description: Batch analyzes multi-facility electricity consumption readings and returns explainable anomalies.
       Events:
         AnalyzeEnergyApi:
@@ -35,11 +35,19 @@ Resources:
           Properties:
             Path: /api/v1/analyze
             Method: options
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        EntryPoints:
+          - serverless/handlers/analyze.ts
+        Minify: false
+        Target: "es2022"
+        Sourcemap: true
 
 Outputs:
   EnerSightApiEndpoint:
     Description: "API Gateway endpoint URL for local or deployed Anomaly Analyzer"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/v1/analyze"
   EnerSightFunctionArn:
-    Description: "EnerSight Anomaly Analyzer Function ARN"
+    Description: "EnerSight Function ARN"
     Value: !GetAtt EnerSightAnomalyAnalyzerFunction.Arn
